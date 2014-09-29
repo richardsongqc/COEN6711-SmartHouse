@@ -1,0 +1,53 @@
+Movement and Smoke Detected and Monitored Security System
+Song Mingyao 7168462			Ji lingyu 7303904
+Xian Jianwei 7426046			Wu Di 6079792
+Concordia University,Faculty of Electrical and Computer Scientce
+
+Introduction
+Security systems are widely used for the civil and military. Consider with the challenge of deliberately action such as robbery,sabotage and stealing or inadvertent mistake like forget to lock the door, did not close the gas well and forget the keys. By the development of embedded system and sensors, A movement and Gas detected and monitored sscurity system could help to solve the problems accurately, and economically
+Motivation 
+我觉得这一部分不需要所以没写
+Project Summary
+For the basic, infared sensors , ultrasonic sensor,smoke sensor and camera will be used to detect and monitored the movement and smoke. Parameters will be displyed and recorded on the PC end. 
+To synthesize the functions, Fingerprint sensor, gas and relay modules will be used into the system to react the paramenters from the basic part.
+ 
+Project Details
+Architecture and Environment 
+
+FRDM-KL25Z wil be used as the development platform. It sophisticated design featuring a Kinetis L series microcontroller, the industry’s first microcontroller built on the ARM® Cortex™-M0+ core. Keil MDK5 will be used as the development environment. Language C is the programming language in this project. PHP will used on the PC end to develop a web based MIS to disply and analysis the parameter we collect from the sensor. Eclipse will be the environment for Web app part.
+
+Sensor List and Functions
+Infared sensors detect the human beings movement in the monitored aera.Two modes will be start up by analysis the parameter collected from infared sensors. Alarm Set Mode will be start up after movement could not detected in the aera for 10 minitues. Alarm Mode will be start up when the unauthorised movement was detected in the aera under the Alarm Set Mode.
+Ultrasonic sensor will be started to measures the distance for unauthorised movement from special protected aera after the it detected under the Alarm Set Mode. When the distance reach the limiation. System will switch to Alarm mode.
+Camera will be started to capture the movement in the aera when the movement is detected.
+Smoke sensor is always working under all system modes. When smoke is detected for 30s, System will switch to Alarm System and send address and contect number to 911.
+further more sensors will be added into the system after above sensors and functions reached the target.
+Gas sensors is always working under all system modes. When gas is detected and system will communicate with the rely modules to cut off the power and start up the fan with rely and inform the owner.
+Fingerprint sensor is used to comfirm the authorization. When the authorization is comfirmed system will switch to Normal mode from the Alarm set mode or alarm mode or switch to Alarm set mode from Normal Mode.
+MIS(Management Information System) is design in PHP,Javascript and Mysql. Data will be wrote into the mysql and displyed in the browser dynamically.
+
+Implementation Issues and Challenges 
+Project should be finish in three months. Six kinds of sensor are used in the system. It requires us to config and understand each sensor well. The basic functions should be done. During the development section I,we need to be practical in the sensor config and familiar with the development envirronment. After we benefit from the sction I, we will try to improve the functions as development section II. 
+
+Deliverables
+We will design a demo of the system, a video of spot test, a manual book and ppt with presentation
+
+Timeline
+Week1 	Config and test the FRDM-KL25Z and familiar with the Keil MDK5 environment
+Week2 	Config and test infared sensors , ultrasonic sensor,smoke sensor and camera
+Week3 	Working on the infared sensors and ultrasonic sensors’ functions
+Week4 	Working on the moke sensor and camera’s functions
+Week5 	Design and finish MIS 
+Week6	Test and improve the Section I 
+Week7	Config and test Fingerprint sensor, gas sensor and relay modules 
+Week8 	Working on the Fingerprint,rely module and gas sensor’s functions
+Week9	Test and improve the Section I 
+Week10 	Take a spot test video and prepare ppt and presentation
+
+Conclusion
+a multi-sensors security system will be made to help the home to become more smarter and easy to manage.During the whole development process. We will learn how to development and manage a industrial project. And be pratical with ARM development and MIS development
+
+References
+FRDM-KL25Z User's Manual
+Technologies for Smart Sensors and Sensor Fusion   Kevin Yallup, Krzysztof Iniewski 
+Integrated Security Systems Design: Concepts, Specifications, and Implementation  By Thomas L. Norman 
