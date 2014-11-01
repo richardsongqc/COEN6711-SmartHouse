@@ -1,0 +1,63 @@
+*******************************************************************************************
+* Project Name:    LQRUG_uart_ex2
+*
+* Freescale Semiconductor
+*
+* Sample Code Only
+*
+* NOTE: This code comes with no guarantees, expressed or implied, and is meant to
+* only show examples to get you started with your projects.
+*******************************************************************************************
+
+DESCRIPTION:
+
+	Demonstrates the use of UART0 wake up using character match from VLPS  on the KL25Z.
+
+TESTED ON:
+
+	- KL25Z
+
+	- IAR EWARM 6.50.6
+
+	- PE Micro DEBUG-APP_Pemicro_v106.SDA
+
+	- Memory Targets:
+
+		FLASH_128KB
+		FLASH_64KB
+		FLASH_32KB
+
+REQUIREMENTS:
+
+	- KL25Z development board running PEmicro Debug Application (See OPENSDAUG.pdf for instructions to install debug app.)
+
+	- Terminal application capable of sending raw hexidecimal values e.g., Hercules
+
+	- Mini USB cable for OpenSDA debugging & powering the KL25Z
+ 
+
+SETUP:
+
+	Terminal:
+		- Open up Device Manager to check COM port name of 'OpenSDA - CDC Serial port'. e.g., COM1, COM2, etc..
+		- Baudrate: 	9600 (Check 'freedom.h' macro 'TERMINAL_BAUD' for baudrate setting.)
+		- Data size: 	8 bits
+		- Parity:	none
+		- Handshake:	OFF	(Called 'Flow control' in PuTTY, set to 'None'.)
+
+	freedom.h/tower.h:
+		- Make sure NO_PLL_INIT is defined
+		- freedom.h/tower.h are local project file, not the platform file
+
+BEHAVIOR:
+
+	- MCGIRCLK output enabled for UART,
+	- UART0 with RDRF interrupt generated (9600kbps, 8-bit, no parity),
+	- match address operation used to wake up from low power mode,
+	- to enter VLPS 'e' or 'E' have to be send to UART0,
+	- to wake up from send 0x81 or 0xAA (address with address mark)		
+			
+ADDITIONAL NOTES:
+
+	IAR: 	Make sure IAR and FREEDOM (or TOWER) are defined in the preprocessor.
+

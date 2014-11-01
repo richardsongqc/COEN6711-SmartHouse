@@ -1,0 +1,65 @@
+*******************************************************************************************
+* Project Name:    LQRUG_bme_ex1
+*
+* Freescale Semiconductor
+*
+* Sample Code Only
+*
+* NOTE: This code comes with no guarantees, expressed or implied, and is meant to
+* only show examples to get you started with your projects.
+*******************************************************************************************
+
+DESCRIPTION:
+
+	Demonstrates the use of Bit Manipulation Engine (BME) on the FRDM KL25Z.
+
+TESTED ON:
+
+	- KL25Z
+
+	- IAR EWARM 6.50.6
+
+	- Keil uVision 4.71.2.0
+
+	- PE Micro DEBUG-APP_Pemicro_v106.SDA
+
+	- Memory Targets:
+
+		FLASH_128KB
+
+REQUIREMENTS:
+
+	- KL25Z development board running PEmicro Debug Application (See OPENSDAUG.pdf for instructions to install debug app.)
+
+	- Terminal application e.g., Hercules, PuTTY
+
+	- Mini USB cable for OpenSDA debugging & powering the KL25Z
+ 
+
+SETUP:
+
+	Terminal:
+		- Open up Device Manager to check COM port name of 'OpenSDA - CDC Serial port'. e.g., COM1, COM2, etc..
+		- Baudrate: 	19200 (Check 'freedom.h'/'tower.h' macro 'TERMINAL_BAUD' for baudrate setting.)
+		- Data size: 	8 bits
+		- Parity:	none
+		- Handshake:	OFF	(Called 'Flow control' in PuTTY, set to 'None'.)
+
+BEHAVIOR:
+
+	The terminal should display the standard target description followed by a line stating "Running the LQRUG_bme_ex1" project."
+	Following this the application should display the start and end values of the SYSTICK for various operations performed in both 
+	normal C and using BME macros.
+
+	Tested operations are: 
+		
+		Logic
+		BFI - Bit Field Insert
+		LAS1 - Load-And-Set 1 bit
+		UBFX - Unsigned Bit Field Extract		
+			
+ADDITIONAL NOTES:
+
+	IAR: 	Make sure IAR and FREEDOM (or TOWER) are defined in the preprocessor.
+
+	Keil: 	Make sure KEIL, FREEDOM (or TOWER) and CMSIS are defined in the preprocessor.

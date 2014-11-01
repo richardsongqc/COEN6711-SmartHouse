@@ -1,0 +1,73 @@
+*******************************************************************************************
+* Project Name:    LQRUG_tpm_ex2
+*
+* Freescale Semiconductor
+*
+* Sample Code Only
+*
+* NOTE: This code comes with no guarantees, expressed or implied, and is meant to
+* only show examples to get you started with your projects.
+*******************************************************************************************
+
+DESCRIPTION:
+
+	Demonstrates PWM generation using TPM0 & DMA on the KL25Z.
+
+TESTED ON:
+
+	- KL25Z
+
+	- IAR EWARM 6.50.6
+
+	- PE Micro DEBUG-APP_Pemicro_v106.SDA
+
+	- Memory Targets:
+
+		FLASH_128KB
+		FLASH_64KB
+		FLASH_32KB
+
+REQUIREMENTS:
+
+	- KL25Z development board running PEmicro Debug Application (See OPENSDAUG.pdf for instructions to install debug app.)
+
+	- Terminal application e.g., Hercules, PuTTY
+
+	- Mini USB cable for OpenSDA debugging & powering the FRDM KL26Z
+
+	- Optional: Oscilloscope to observe PWM signals
+ 
+
+SETUP:
+
+	Terminal:
+		- Open up Device Manager to check COM port name of 'OpenSDA - CDC Serial port'. e.g., COM1, COM2, etc..
+		- Baudrate: 	115200 (Check 'freedom.h' macro 'TERMINAL_BAUD' for baudrate setting.)
+		- Data size: 	8 bits
+		- Parity:	none
+		- Handshake:	OFF	(Called 'Flow control' in PuTTY, set to 'None'.)
+
+	freedom.h/tower.h:
+		- Make sure NO_PLL_INIT is defined
+		- freedom.h/tower.h are local project file, not the platform file	  
+
+BEHAVIOR:
+
+	- TPM0 used in central PWM mode,
+	- just CH2 (PTC3) outputs used,
+	- CH2 of TPM0 configured as normal PWM (high-true pulses)
+	- CH1 of TPM0 configured as inverted PWM (low-true pulses)
+	- duty cycle of PWM signal is set from buffer value on DMA request
+	- DMA0 request set to TPM0 overflow, 
+	- DMA source adrress is data buffer,
+	- DMA destination address is TPM0_C2V
+	- DMA source is incremented after each request, destination not
+	- TPM0 and DMA running after VLPS entering,
+
+ADDITIONAL NOTES:
+
+	IAR: 	Make sure IAR and FREEDOM (or TOWER) are defined in the preprocessor.
+
+	For further explanation read "Kinetis L Peripheral Module Quick Reference" (KLQRUG.pdf).
+
+		

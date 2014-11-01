@@ -1,0 +1,60 @@
+*******************************************************************************************
+* Project Name:    LQRUG_uart_ex1
+*
+* Freescale Semiconductor
+*
+* Sample Code Only
+*
+* NOTE: This code comes with no guarantees, expressed or implied, and is meant to
+* only show examples to get you started with your projects.
+*******************************************************************************************
+
+DESCRIPTION:
+
+	Demonstrates the use of UART0 using polling and interrupt methods on the KL25Z.
+
+TESTED ON:
+
+	- KL25Z
+
+	- IAR EWARM 6.50.6
+
+	- PE Micro DEBUG-APP_Pemicro_v106.SDA
+
+	- Memory Targets:
+
+		FLASH_128KB
+		FLASH_64KB
+		FLASH_32KB
+
+REQUIREMENTS:
+
+	- KL25Z development board running PEmicro Debug Application (See OPENSDAUG.pdf for instructions to install debug app.)
+
+	- Terminal application e.g., Hercules, PuTTY
+
+	- Mini USB cable for OpenSDA debugging & powering the KL25Z
+ 
+
+SETUP:
+
+	Terminal:
+		- Open up Device Manager to check COM port name of 'OpenSDA - CDC Serial port'. e.g., COM1, COM2, etc..
+		- Baudrate: 	115200 (Check 'freedom.h' macro 'TERMINAL_BAUD' for baudrate setting.)
+		- Data size: 	8 bits
+		- Parity:	none
+		- Handshake:	OFF	(Called 'Flow control' in PuTTY, set to 'None'.)
+
+	freedom.h/tower.h:
+		- Make sure NO_PLL_INIT is defined
+		- freedom.h/tower.h are local project file, not the platform file
+
+BEHAVIOR:
+
+	User enters characters into the terminal application, and they are echoed back by the KL25Z. User must select POLLING_MODE,
+	or INTERRUPT_MODE at time of build.		
+			
+ADDITIONAL NOTES:
+
+	IAR: 	Make sure IAR and FREEDOM (or TOWER) are defined in the preprocessor.
+
