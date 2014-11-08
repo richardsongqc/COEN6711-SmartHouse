@@ -1,0 +1,37 @@
+' File: PIR_Sensor.bs2
+
+' Test code for SimplyTronics PIR Sensors(ST-00031 and ST-00081)
+' Author        : SimplyTronics
+' Date          : 2013-09-10
+
+
+
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+
+PIR_OUT   PIN       2
+
+i         VAR       Byte
+
+Init:
+  INPUT PIR_OUT
+  i = 40
+
+  DO                                                              ' ~40 seconds counter down timer
+    i = i - 1
+    DEBUG HOME, "Wait 40 seconds for PIR Sensor warm up",CR,
+          DEC i, "   seconds left  "
+    PAUSE 1000
+  LOOP UNTIL i = 0
+
+
+  DEBUG CLS, HOME, TAB, "SimplyTronics PIR Sensor",CR, TAB, "(ST-00031/ST-00081)", CR,
+        REP "="\40
+main:
+
+DO
+ DEBUG CRSRXY, 0,4, "IN0 = ", BIN1 IN0                            ' Display state of P0
+ PAUSE 100                                                        ' Small Delay
+LOOP                                                              ' Repeat Foreve
+
