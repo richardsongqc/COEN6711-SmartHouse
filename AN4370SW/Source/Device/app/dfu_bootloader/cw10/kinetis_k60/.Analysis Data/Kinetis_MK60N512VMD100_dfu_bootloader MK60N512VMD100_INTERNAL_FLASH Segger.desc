@@ -1,0 +1,17 @@
+12 
+<InfoDesc>
+ 30 0  58 Drop packet due to missing SYNC before it - ITM - val=0x3f 57 Drop packet due to missing SYNC before it - ITM - val=0x5 58 Drop packet due to missing SYNC before it - ITM - val=0x20 58 Drop packet due to missing SYNC before it - ITM - val=0xc0 57 Drop packet due to missing SYNC before it - ITM - val=0xe 58 Drop packet due to missing SYNC before it - ITM - val=0x59 58 Drop packet due to missing SYNC before it - ITM - val=0x10 58 Drop packet due to missing SYNC before it - ITM - val=0x40 80 Exception packet - ETM - Thumb mode, full destination addr=0x47a8, exception #89 58 Drop packet due to missing SYNC before it - ITM - val=0x3e 57 Drop packet due to missing SYNC before it - ITM - val=0x8 27 Exception exit packet - ETM 58 Drop packet due to missing SYNC before it - ITM - val=0x2b 57 Drop packet due to missing SYNC before it - ITM - val=0x0 58 Drop packet due to missing SYNC before it - ITM - val=0x30 57 Drop packet due to missing SYNC before it - ITM - val=0x7 57 Drop packet due to missing SYNC before it - ITM - val=0xb 57 Drop packet due to missing SYNC before it - ITM - val=0x1 58 Drop packet due to missing SYNC before it - ITM - val=0x29 58 Drop packet due to missing SYNC before it - ITM - val=0x15 58 Drop packet due to missing SYNC before it - ITM - val=0x12 58 Drop packet due to missing SYNC before it - ITM - val=0x2c 58 Drop packet due to missing SYNC before it - ITM - val=0x11 58 Drop packet due to missing SYNC before it - ITM - val=0x2d 58 Drop packet due to missing SYNC before it - ITM - val=0x19 58 Drop packet due to missing SYNC before it - ITM - val=0x25 58 Drop packet due to missing SYNC before it - ITM - val=0x26 58 Drop packet due to missing SYNC before it - ITM - val=0x18 58 Drop packet due to missing SYNC before it - ITM - val=0x54 25 
+</InfoDesc>
+<ErrorDesc>
+ 2 0  41 UNKNOWN packet found while decoding - ETM 27 
+</ErrorDesc>
+<SignalDesc>
+ 1 0  29 
+</SignalDesc>
+<ProfileDesc>
+ 1 0  29 
+</ProfileDesc>
+<CustomDesc>
+ 2 0  97 ISYNC PACKET - ETM - periodic I-sync, addr=0x68bc , secure state, halfword alignment, Thumb state 15 
+</CustomDesc>
+

@@ -1,0 +1,197 @@
+**1
+C:/Documents and Settings/b06862/Desktop/My Quick Notes/DFU AN/AN4370SW/Source/Device/app/dfu_bootloader/cw10/kinetis_k60/.Analysis Data/Kinetis_MK60N512VMD100_dfu_bootloader MK60N512VMD100_INTERNAL_FLASH Segger_0_kinetis_k60.afx
+
+**Lines
+
+"Function": "Function Name"(width 200, sort, string); "Num Calls"(width 80, sort, int); "Inclusive"(width 60, sort, float); "Min Inclusive"(width 60, sort, float); "Max Inclusive"(width 70, sort, float); "Avg Inclusive"(width 70, sort, float); "Percent Inclusive"(width 60, sort, float); "Exclusive"(width 60, sort, float); "Min Exclusive"(width 60, sort, float); "Max Exclusive"(width 70, sort, float); "Avg Exclusive"(width 70, sort, float); "Percent Exclusive"(width 60, sort, float); "Percent Total Calls"(width 70, sort, float); "Code Size"(width 70, sort, int)
+"Call Pair": "Caller"(width 200, sort, string); "Callee"(width 200, sort, string); "Num Calls"(width 80, sort, int); "Inclusive"(width 60, sort, float); "Min Inclusive"(width 60, sort, float); "Max Inclusive"(width 70, sort, float); "Avg Inclusive"(width 70, sort, float); "Percent Callee"(width 60, sort, float); "Percent Caller"(width 60, sort, float); "Call Site"(width 60, sort, int)
+**Data
+
+*0
+"Function": "Watchdog_Reset"(link 6); "9"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "11.69"; "40"
+"Function": "USB_Class_DFU_Dnload"(link 15); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "290"
+"Function": "uart_putchar"(link 20); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "42"
+"Function": "out_char"(link 21); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "22"
+"Function": "printk_putc"(link 22); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "58"
+"Function": "printk"(link 26); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "1300"
+"Function": "printf_kinetis"(link 27); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "56"
+"Function": "main"(link 28); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "34"
+"Function": "TestApp_Task"(link 35); "10"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "12.99"; "56"
+"Function": "RemoveTimerQ"(link 38); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "50"
+"Function": "EnableTimerInterrupt"(link 40); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "34"
+"Function": "DisableTimerInterrupt"(link 41); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "38"
+"Function": "Loader_init"(link 43); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "100"
+"Function": "USB_Class_DFU_set_bwPoll_TimeOut"(link 61); "2"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "2.60"; "44"
+"Function": "USB_Class_DFU_App_Reset_Flag_Manifest"(link 67); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "16"
+"Function": "USB_Other_Requests"(link 71); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "296"
+"Function": "DFU_Idle_State"(link 73); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "292"
+"Function": "USB_Class_DFU_Periodic_Task"(link 84); "9"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "11.69"; "80"
+"Function": "USB_Sof_Service"(link 88); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "34"
+"Function": "USB_Class_Send_Data"(link 92); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "122"
+"Function": "USB_Class_Periodic_Task"(link 93); "10"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "12.99"; "2"
+"Function": "USB_Control_Service"(link 95); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "434"
+"Function": "USB_Control_Service_Handler"(link 96); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "86"
+"Function": "USB_Device_Get_Status"(link 111); "5"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "6.49"; "78"
+"Function": "USB_Device_Set_Status"(link 112); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "150"
+"Function": "USB_Device_Call_Service"(link 114); "2"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "2.60"; "52"
+"Function": "USB_DCI_Get_BDT_Index"(link 116); "2"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "2.60"; "42"
+"Function": "USB_DCI_Validate_Param"(link 117); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "64"
+"Function": "USB_DCI_Prepare_Send_Data"(link 118); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "50"
+"Function": "USB_Device_Send_Data"(link 126); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "164"
+"Function": "USB_Bus_Token_Cpl_Handler"(link 130); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "558"
+"Function": "USB_ISR"(link 131); "2"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "2.60"; "634"
+"Function": "memset"(link 142); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "16"
+"Function": "__fill_mem"(link 143); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "112"
+"Function": "raise"(link 144); "1"; "0"; "0"; "0"; "0"; "0.00"; "0"; "0"; "0"; "0"; "0.00"; "1.30"; "84"
+
+*6
+"Call Pair": "main"; "Watchdog_Reset"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x12d4"
+
+*15
+"Call Pair": "DFU_Idle_State"; "USB_Class_DFU_Dnload"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x2bf4"
+"Call Pair": "USB_Class_DFU_Dnload"; "USB_Class_DFU_set_bwPoll_TimeOut"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x8f8"
+"Call Pair": "USB_Class_DFU_Dnload"; "USB_Class_DFU_App_Reset_Flag_Manifest"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x8fc"
+"Call Pair": "USB_Class_DFU_Dnload"; "Loader_init"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x908"
+"Call Pair": "USB_Class_DFU_Dnload"; "USB_Class_DFU_set_bwPoll_TimeOut"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x99e"
+"Call Pair": "USB_Class_DFU_Dnload"; "printf_kinetis"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x9a6"
+
+*20
+"Call Pair": "out_char"; "uart_putchar"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0xc32"
+
+*21
+"Call Pair": "printk_putc"; "out_char"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0xc28"
+"Call Pair": "out_char"; "uart_putchar"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0xc32"
+
+*22
+"Call Pair": "printk"; "printk_putc"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0xd96"
+"Call Pair": "printk_putc"; "out_char"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0xc28"
+
+*26
+"Call Pair": "printf_kinetis"; "printk"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x12a4"
+"Call Pair": "printk"; "printk_putc"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0xd96"
+
+*27
+"Call Pair": "USB_Class_DFU_Dnload"; "printf_kinetis"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x9a6"
+"Call Pair": "printf_kinetis"; "printk"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x12a4"
+
+*28
+"Call Pair": "main"; "Watchdog_Reset"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x12d4"
+"Call Pair": "main"; "TestApp_Task"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x12d8"
+
+*35
+"Call Pair": "main"; "TestApp_Task"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x12d8"
+"Call Pair": "TestApp_Task"; "USB_Class_Periodic_Task"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x1626"
+"Call Pair": "TestApp_Task"; "USB_Class_DFU_Periodic_Task"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x162a"
+
+*38
+"Call Pair": "DFU_Idle_State"; "RemoveTimerQ"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x2bd4"
+"Call Pair": "RemoveTimerQ"; "DisableTimerInterrupt"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x16f0"
+"Call Pair": "RemoveTimerQ"; "memset"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x1700"
+"Call Pair": "RemoveTimerQ"; "EnableTimerInterrupt"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x1704"
+
+*40
+"Call Pair": "RemoveTimerQ"; "EnableTimerInterrupt"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x1704"
+
+*41
+"Call Pair": "RemoveTimerQ"; "DisableTimerInterrupt"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x16f0"
+
+*43
+"Call Pair": "USB_Class_DFU_Dnload"; "Loader_init"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x908"
+
+*61
+"Call Pair": "USB_Class_DFU_Dnload"; "USB_Class_DFU_set_bwPoll_TimeOut"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x8f8"
+"Call Pair": "USB_Class_DFU_Dnload"; "USB_Class_DFU_set_bwPoll_TimeOut"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x99e"
+
+*67
+"Call Pair": "USB_Class_DFU_Dnload"; "USB_Class_DFU_App_Reset_Flag_Manifest"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x8fc"
+
+*71
+"Call Pair": "USB_Control_Service"; "USB_Other_Requests"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x29f4"
+"Call Pair": "USB_Other_Requests"; "DFU_Idle_State"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x2a7c"
+
+*73
+"Call Pair": "USB_Other_Requests"; "DFU_Idle_State"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x2a7c"
+"Call Pair": "DFU_Idle_State"; "RemoveTimerQ"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x2bd4"
+"Call Pair": "DFU_Idle_State"; "USB_Class_DFU_Dnload"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x2bf4"
+
+*84
+"Call Pair": "TestApp_Task"; "USB_Class_DFU_Periodic_Task"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x162a"
+"Call Pair": "USB_Class_DFU_Periodic_Task"; "USB_ISR"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x47a8"
+
+*88
+"Call Pair": "USB_Device_Call_Service"; "USB_Sof_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3214"
+"Call Pair": "USB_Sof_Service"; "USB_Device_Set_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x322c"
+
+*92
+"Call Pair": "USB_Control_Service_Handler"; "USB_Class_Send_Data"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3638"
+"Call Pair": "USB_Class_Send_Data"; "USB_Device_Get_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x33a8"
+"Call Pair": "USB_Class_Send_Data"; "USB_Device_Get_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x33b2"
+"Call Pair": "USB_Class_Send_Data"; "USB_Device_Send_Data"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3402"
+
+*93
+"Call Pair": "TestApp_Task"; "USB_Class_Periodic_Task"; "9"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x1626"
+"Call Pair": "USB_Class_Periodic_Task"; "USB_ISR"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x47a8"
+
+*95
+"Call Pair": "USB_Device_Call_Service"; "USB_Control_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3450"
+"Call Pair": "USB_Control_Service"; "USB_Other_Requests"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x29f4"
+"Call Pair": "USB_Control_Service"; "USB_Device_Get_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x346a"
+"Call Pair": "USB_Control_Service"; "USB_Control_Service_Handler"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x35dc"
+
+*96
+"Call Pair": "USB_Control_Service"; "USB_Control_Service_Handler"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x35dc"
+"Call Pair": "USB_Control_Service_Handler"; "USB_Class_Send_Data"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3638"
+
+*111
+"Call Pair": "USB_Class_Send_Data"; "USB_Device_Get_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x33a8"
+"Call Pair": "USB_Class_Send_Data"; "USB_Device_Get_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x33b2"
+"Call Pair": "USB_Control_Service"; "USB_Device_Get_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x346a"
+"Call Pair": "USB_ISR"; "USB_Device_Get_Status"; "2"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4810"
+
+*112
+"Call Pair": "USB_Sof_Service"; "USB_Device_Set_Status"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x322c"
+
+*114
+"Call Pair": "USB_Bus_Token_Cpl_Handler"; "USB_Device_Call_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x478c"
+"Call Pair": "USB_ISR"; "USB_Device_Call_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4880"
+"Call Pair": "USB_Device_Call_Service"; "USB_Sof_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3214"
+"Call Pair": "USB_Device_Call_Service"; "USB_Control_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3450"
+
+*116
+"Call Pair": "USB_DCI_Validate_Param"; "USB_DCI_Get_BDT_Index"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3df0"
+"Call Pair": "USB_Bus_Token_Cpl_Handler"; "USB_DCI_Get_BDT_Index"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x45b2"
+
+*117
+"Call Pair": "USB_Device_Send_Data"; "USB_DCI_Validate_Param"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x440c"
+"Call Pair": "USB_DCI_Validate_Param"; "USB_DCI_Get_BDT_Index"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3df0"
+
+*118
+"Call Pair": "USB_Device_Send_Data"; "USB_DCI_Prepare_Send_Data"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4468"
+
+*126
+"Call Pair": "USB_Class_Send_Data"; "USB_Device_Send_Data"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x3402"
+"Call Pair": "USB_Device_Send_Data"; "USB_DCI_Validate_Param"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x440c"
+"Call Pair": "USB_Device_Send_Data"; "USB_DCI_Prepare_Send_Data"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4468"
+
+*130
+"Call Pair": "USB_ISR"; "USB_Bus_Token_Cpl_Handler"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x48de"
+"Call Pair": "USB_Bus_Token_Cpl_Handler"; "USB_DCI_Get_BDT_Index"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x45b2"
+"Call Pair": "USB_Bus_Token_Cpl_Handler"; "USB_Device_Call_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x478c"
+
+*131
+"Call Pair": "USB_Class_Periodic_Task"; "USB_ISR"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x47a8"
+"Call Pair": "USB_ISR"; "USB_Device_Get_Status"; "2"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4810"
+"Call Pair": "USB_ISR"; "USB_Device_Call_Service"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4880"
+"Call Pair": "USB_ISR"; "USB_Bus_Token_Cpl_Handler"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x48de"
+
+*142
+"Call Pair": "RemoveTimerQ"; "memset"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x1700"
+"Call Pair": "memset"; "__fill_mem"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4d08"
+"Call Pair": "memset"; "raise"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4d8c"
+
+*143
+"Call Pair": "memset"; "__fill_mem"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4d08"
+
+*144
+"Call Pair": "memset"; "raise"; "1"; "0"; "0"; "0"; "0"; "0.00"; "0.00"; "0x4d8c"
+

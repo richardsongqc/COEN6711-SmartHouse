@@ -1,0 +1,23 @@
+**1
+C:/Documents and Settings/b06862/Desktop/My Quick Notes/DFU AN/AN4370SW/Source/Device/app/dfu_bootloader/cw10/kinetis_k60/.Analysis Data/Kinetis_MK60N512VMD100_dfu_bootloader MK60N512VMD100_INTERNAL_FLASH Segger_0_kinetis_k60.afx
+
+**Lines
+
+"File": "Name"(width 200, sort string); "Number of Lines"(width 80, sort int); "Lines Executed"(width 60, sort int); "Coverage %%"(width 70, sort float)
+**Data
+
+*0
+"File": "RealTimerCounter_kinetis.c"; "434"; "18"; "4.15"
+"File": "printf.c"; "689"; "395"; "57.33"
+"File": "sci.c"; "278"; "11"; "3.96"
+"File": "wdt_kinetis.c"; "82"; "2"; "2.44"
+"File": "main_kinetis.c"; "451"; "17"; "3.77"
+"File": "Loader.c"; "806"; "9"; "1.12"
+"File": "dfu_mouse.c"; "851"; "22"; "2.59"
+"File": "usb_descriptor.c"; "1694"; "55"; "3.25"
+"File": "usb_dfu.c"; "1448"; "166"; "11.46"
+"File": "usb_class.c"; "618"; "46"; "7.44"
+"File": "usb_framework.c"; "1511"; "118"; "7.81"
+"File": "usb_dci_kinetis.c"; "1695"; "450"; "26.55"
+"File": "usb_driver.c"; "794"; "83"; "10.45"
+
