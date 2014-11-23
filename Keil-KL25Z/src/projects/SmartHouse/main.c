@@ -21,8 +21,19 @@
 #include "mcg.h"
 #include "uart.h"
 #include "MemMapPtr_KL25Z4.h"
+#include <SerialProtocol.h>
 #include "Delay.h"
 
+
+	U8 uPIR 	 = 0;
+	U16 usDistance = 2;
+	U8 uRelay1   = 0;
+	U8 uRelay2   = 0;
+	U8 uHiHumid  = 20;
+	U8 uLoHumid  = 0;	
+	U8 uHiTemp   = 0;	
+	U8 uLoTemp   = 0;	
+	
 int main(void)
 {
 	//=============================================================================
@@ -63,23 +74,53 @@ int main(void)
 	// Configure Uart0:
 	uart0_init(UART0_BASE_PTR,48000,TERMINAL_BAUD); // Initializing Uart0 
 	//=============================================================================
+	
+
+	
 	while(1)
 	{
-		print("PIR\n\r");
-		//PutChar('1');
-		//printf("1/n");
-		Delay(1000); // delay for 1s
 		
-		print("Ultrasonic\n\r");
-		//PutChar('2');
-		//printf("2/n");
+		SendPIR(uPIR);								 	
+		print("\n\r");
 		Delay(1000); // delay for 1s
+		uPIR = ( uPIR == 0 ) ? 1 : 0;
 		
-		print("Relay\n\r");
-		//PutChar('3');
-		//printf("3/n");
+		SendUltrasonicRange(usDistance);	
+		print("\n\r");
 		Delay(1000); // delay for 1s
+		usDistance++;
+		if( usDistance > 400 )
+		{
+			usDistance = 2;
+		}
 		
-		print("===========================\n");
+		SendRelay1(uRelay1);							
+		print("\n\r");
+		Delay(1000); // delay for 1s
+		uRelay1 = ( uRelay1 == 0 ) ? 1 : 0;
+		
+		SendRelay2(uRelay2);	
+		print("\n\r");
+		Delay(1000); // delay for 1s
+		uRelay2 = ( uRelay2 == 0 ) ? 1 : 0;
+		
+		
+		SendDHT( uHiHumid++, uLoHumid, uHiTemp++, uLoHumid);  
+		print("\n\r");
+		Delay(1000); // delay for 1s
+		if( uHiHumid > 90 )
+		{
+			uHiHumid = 20;
+		}
+		if( uHiTemp > 50 )
+		{
+			uHiTemp = 0;
+		}
+		if( uLoHumid > 99 )
+		{
+			uLoHumid = 0;
+		}
+		
+		print("===========================\n\r");
 	}
 }

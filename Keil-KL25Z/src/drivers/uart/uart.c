@@ -275,11 +275,3 @@ void print(const char *str)
         uart0_putchar(UART0_BASE_PTR,str[i]);
     }
 }   
-
-void print1(uint8_t *str)
-{
-    while(*str != '\0')
-    {
-        uart0_putchar(UART0_BASE_PTR,*str++);
-    }
-}   

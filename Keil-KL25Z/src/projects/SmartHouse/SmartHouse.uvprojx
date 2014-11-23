@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\drivers\mcg;..\..\platforms;..\..\cpu\headers\CMSIS;..\..\drivers\uart;..\..\common;..\..\drivers</IncludePath>
+              <IncludePath>..\..\drivers\mcg;..\..\platforms;..\..\cpu\headers\CMSIS;..\..\drivers\uart;..\..\common;..\..\drivers;.\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -412,6 +412,11 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>SerialComm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SerialComm.c</FilePath>
             </File>
           </Files>
         </Group>

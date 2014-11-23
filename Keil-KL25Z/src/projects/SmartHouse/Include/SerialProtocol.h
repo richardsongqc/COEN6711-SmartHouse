@@ -17,9 +17,9 @@ typedef signed long   S32;
 #define SENSOR_RELAY_2				0x04		// Relay 2
 #define SENSOR_DHT					0x05		// Digital Humid & Temperature
 
-// Send Message to PC via Serial Port from KL25Z board
+// Send Message from KL25Z board to PC via Serial Port
 extern int SendPIR(U8 uOn);						// ON, OFF of PIR
-extern int SendUltrasonicRange(U8 uDistance);	// Distance - cm (2-400)
+extern int SendUltrasonicRange(U16 usDistance);	// Distance - cm (2-400)
 extern int SendRelay1(U8 uOn);					// ON, OFF of Relay1
 extern int SendRelay2(U8 uOn);					// ON, OFF of Relay2
 extern int SendDHT(							 
