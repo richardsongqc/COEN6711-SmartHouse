@@ -81,12 +81,12 @@ int main(void)
 	{
 		
 		SendPIR(uPIR);								 	
-		print("\n\r");
+		//print("\n\r");
 		Delay(1000); // delay for 1s
 		uPIR = ( uPIR == 0 ) ? 1 : 0;
 		
 		SendUltrasonicRange(usDistance);	
-		print("\n\r");
+		//print("\n\r");
 		Delay(1000); // delay for 1s
 		usDistance++;
 		if( usDistance > 400 )
@@ -95,18 +95,18 @@ int main(void)
 		}
 		
 		SendRelay1(uRelay1);							
-		print("\n\r");
+		//print("\n\r");
 		Delay(1000); // delay for 1s
 		uRelay1 = ( uRelay1 == 0 ) ? 1 : 0;
 		
 		SendRelay2(uRelay2);	
-		print("\n\r");
+		//print("\n\r");
 		Delay(1000); // delay for 1s
 		uRelay2 = ( uRelay2 == 0 ) ? 1 : 0;
 		
 		
 		SendDHT( uHiHumid++, uLoHumid, uHiTemp++, uLoHumid);  
-		print("\n\r");
+		//print("\n\r");
 		Delay(1000); // delay for 1s
 		if( uHiHumid > 90 )
 		{
@@ -121,6 +121,6 @@ int main(void)
 			uLoHumid = 0;
 		}
 		
-		print("===========================\n\r");
+		//print("===========================\n\r");
 	}
 }
