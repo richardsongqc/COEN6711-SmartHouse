@@ -28,6 +28,7 @@ typedef signed long   S32;
 #define CMD_OK				 	0x8000
 #define ERR_CMD				 	0x8001
 #define ERR_CMD_FORMAT			0x8002
+#define ERR_NO_RESPONSE			0x8003
 
 // Send Message from KL25Z board to PC via Serial Port
 extern U16 SendPIR(U8 uOn);						// ON, OFF of PIR

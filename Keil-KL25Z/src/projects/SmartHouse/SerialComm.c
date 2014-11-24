@@ -16,7 +16,11 @@ U16 SendBuffer()
 		uart0_putchar(UART0_BASE_PTR,(char)szCmdBuf[i]);
 	}
 	
-	//while( uart0_getchar_present(UART0_BASE_PTR) == 0 );  // Wait for the response
+	if ( uart0_getchar_present(UART0_BASE_PTR) == 0 )
+	{
+		return ERR_NO_RESPONSE;
+	}
+	
 	memset( szRepBuf, 0, sizeof(szRepBuf) );
 	szRepBuf[0] = (U8)uart0_getchar(UART0_BASE_PTR);
 	if( szRepBuf[0] != (szCmdBuf[0] | 0x80 ) )

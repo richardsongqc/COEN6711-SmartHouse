@@ -22,7 +22,6 @@
 #include "uart.h"
 #include "MemMapPtr_KL25Z4.h"
 #include <SerialProtocol.h>
-#include "Delay.h"
 #include "dht11.h"
 
 
@@ -73,7 +72,7 @@ int main(void)
 	
 	//=============================================================================
 	// SysTick Configuration:
-	SysTick_Config(SystemCoreClock/1000); /* Generate interrupt each 1 ms */
+	SysTick_Config(100/* SystemCoreClock/1000 */); /* Generate interrupt each 1 ms */
 	//=============================================================================
 	
 	// Configure Uart0:
@@ -100,7 +99,9 @@ int main(void)
 			break; 			
 		case CMD_DHT			 : 
 			GetDHT( &uHiHumid,  &uLoHumid, &uHiTemp, &uLoTemp );
-			break; 			
+			break; 	
+		default:
+			break;
 		}
 		
 		GetTemp();

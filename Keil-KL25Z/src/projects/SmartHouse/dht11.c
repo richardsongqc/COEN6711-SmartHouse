@@ -13,6 +13,34 @@ const uint32_t led_mask[] = {1UL << 18, 1UL << 19, 1UL << 1};
 DHT dht;
 stat LineStat;
 
+
+
+volatile uint32_t msTicks;                            /* counts 1ms timeTicks */
+int32_t IntervalBegin;
+
+/*----------------------------------------------------------------------------
+  SysTick_Handler
+ *----------------------------------------------------------------------------*/
+//---------------------------------------
+void SysTick_Handler(void) {
+  msTicks++;                       
+}
+/*-----------------------------------------*/
+
+/*------------------------------------------------------------------------------
+  delays number of tick Systicks (happens every 1 ms)
+ *------------------------------------------------------------------------------*/
+__INLINE static void Delay (uint32_t dlyTicks) {
+  uint32_t curTicks;
+
+  curTicks = msTicks;
+  while ((msTicks - curTicks) < dlyTicks);
+}
+
+
+
+
+
 void Initialize(void) 
 {
     SIM->SCGC5    |= (1UL <<  10) | (1UL <<  12);       /* Enable Clock to Port B & D */ 
@@ -31,30 +59,6 @@ void Initialize(void)
     FPTD->PDDR = led_mask[2];                           /* enable PTD1 as Output */
     
     
-}
-
-volatile uint32_t msDHTTicks;                            /* counts 1ms timeTicks */
-int32_t IntervalBegin;
-
-/*----------------------------------------------------------------------------
-  SysDHTTick_Handler
- *----------------------------------------------------------------------------*/
-//---------------------------------------
-void SysDHTTick_Handler(void) 
-{
-    msDHTTicks++;                       
-}
-/*-----------------------------------------*/
-
-/*------------------------------------------------------------------------------
-  delays number of tick Systicks (happens every 1 ms)
- *------------------------------------------------------------------------------*/
-__INLINE static void Delay (uint32_t dlyTicks) 
-{
-    uint32_t curTicks;
-
-    curTicks = msDHTTicks;
-    while ((msDHTTicks - curTicks) < dlyTicks);
 }
 
 /*----------------------------------------------------------------------------
@@ -164,7 +168,7 @@ int BitRec()
                     LowCount++;
                     HighCount=0;
                     
-                    inter=msDHTTicks-IntervalBegin;
+                    inter=msTicks-IntervalBegin;
                     if ((inter>=2) && (inter<=0x10))
                     {
                         Rec=Rec<<1;
@@ -218,7 +222,7 @@ int BitRec()
             {
                 if(HighCount==0) 
                 {
-                    IntervalBegin=msDHTTicks;
+                    IntervalBegin=msTicks;
                 }
                 HighCount++;
             }
@@ -244,21 +248,21 @@ void GetTemp( void )
 		FPTB->PDDR = (1UL<<18| 1UL<<19|1UL<<1|1UL<<2|1 ); //pin setup output
 		FPTB->PCOR=1;       //-----------------
 		SendCount++;
-		IntervalBegin=msDHTTicks;
+		IntervalBegin=msTicks;
 		LineStat=SendLow;
 		break;
 	case SendLow:
 		//SendCount++;
-		if(msDHTTicks-IntervalBegin>=4000)
+		if(msTicks-IntervalBegin>=4000)
 		{
 			FPTB->PSOR=1;       //------------------send high 
 			LineStat=SendHigh;
-			IntervalBegin=msDHTTicks;
+			IntervalBegin=msTicks;
 		}
 		break;
 	case SendHigh:
 		//SendCount++;
-		if(msDHTTicks-IntervalBegin>4)
+		if(msTicks-IntervalBegin>4)
 		{
 			SendCount=0;
 			FPTB->PDDR = (1UL<<18| 1UL<<19|1UL<<1|1UL<<2); //pin setup input
@@ -272,19 +276,19 @@ void GetTemp( void )
 		{
 			if (LowCount==0)
 			{
-				IntervalBegin=msDHTTicks;
+				IntervalBegin=msTicks;
 			}
 			LowCount++;
 		}
 		else
 		{
-			int32_t inter=msDHTTicks-IntervalBegin;
+			int32_t inter=msTicks-IntervalBegin;
 			if((inter>15) && (inter<65))
 			{
 				LowCount=0;
 				LineStat=BeginRecDataH;
-				msDHTTicks=0;
-				IntervalBegin=msDHTTicks;
+				msTicks=0;
+				IntervalBegin=msTicks;
 				HighCount=1;
 			}
 			else
@@ -299,7 +303,7 @@ void GetTemp( void )
 		a=FPTB->PDIR;
 		if((a&0x01)==0)
 		{
-			int32_t inter=msDHTTicks-IntervalBegin;
+			int32_t inter=msTicks-IntervalBegin;
 			if((inter>5) && (inter<0x60))
 			{
 				clearCount();

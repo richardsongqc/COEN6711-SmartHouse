@@ -1,15 +1,16 @@
-#ifndef __DELAY_H__
-#define __DELAY_H__
+#include "Delay.h"
 
-///////////////////////////////////////////////////////////////////////////////
+volatile uint32_t msTicks;                            /* counts 1ms timeTicks */
+int32_t IntervalBegin;
 
 /*----------------------------------------------------------------------------
   SysTick_Handler
  *----------------------------------------------------------------------------*/
 //---------------------------------------
-extern void SysTick_Handler(void);
-
-
+void SysTick_Handler(void) 
+{
+	msTicks++;                       
+}
 /*-----------------------------------------*/
 
 /*------------------------------------------------------------------------------
@@ -22,5 +23,3 @@ __INLINE static void Delay (uint32_t dlyTicks)
 	curTicks = msTicks;
 	while ((msTicks - curTicks) < dlyTicks);
 }
-
-#endif //DELAY
