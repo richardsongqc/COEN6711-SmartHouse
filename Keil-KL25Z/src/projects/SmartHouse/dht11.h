@@ -1,3 +1,4 @@
+
 #ifndef DHT11_H
 #define DHT11_H
 
@@ -31,7 +32,8 @@ typedef struct
 
 extern DHT dht;
 
-extern void GetTemp(void);
+extern void InitializeLED(void) ;
+extern int GetTemp(void);
 extern void CtrlRelay(char Port1,char Port2);
 
 #endif

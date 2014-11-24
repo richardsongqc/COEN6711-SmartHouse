@@ -40,7 +40,7 @@ int main(void)
 	U16 usDistance = 400;
 	U8 uHiHumid = 55;
 	U8 uLoHumid = 0;
-	U8 uHiTemp  = 25;
+	U8 uHiTemp  = 19;
 	U8 uLoTemp  = 0;
 	
 	//=============================================================================
@@ -72,13 +72,14 @@ int main(void)
 	
 	//=============================================================================
 	// SysTick Configuration:
-	SysTick_Config(100/* SystemCoreClock/1000 */); /* Generate interrupt each 1 ms */
+	SysTick_Config(SystemCoreClock/100000); /* Generate interrupt each 1 ms */
 	//=============================================================================
 	
 	// Configure Uart0:
 	uart0_init(UART0_BASE_PTR,48000,TERMINAL_BAUD); // Initializing Uart0 
 	//=============================================================================
 	
+	InitializeLED();
 	
 	while(1)
 	{
@@ -104,15 +105,20 @@ int main(void)
 			break;
 		}
 		
-		GetTemp();
-		SendDHT( (U8)(dht.RecHumI), (U8)dht.RecHumD, (U8)dht.RecTI, (U8)dht.RecTD);  
-		if (dht.RecTI> uHiTemp) 
+		if( GetTemp() == 1 )
+		{
+			SendDHT( (U8)(dht.RecHumI), (U8)dht.RecHumD, (U8)dht.RecTI, (U8)dht.RecTD);  
+		}
+		
+		if (dht.RecTI < uHiTemp) 
 		{
 			CtrlRelay(1,0);
+			SendRelay1(1);
 		}
 		else 
 		{
 			CtrlRelay(0,1);
+			SendRelay1(0);
 		}   
 	}
 }
