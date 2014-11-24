@@ -42,13 +42,15 @@ extern U16 SendDHT(
 
 // Get Message from PC to KL25Z 
 extern U16 RecvBuffer( U8* uCmd );
+extern U16 GetUltrasonicRange(U16* usDistance);
+extern U16 GetRelay1( U8* uOn );
+extern U16 GetRelay2( U8* uOn );
 extern U16 GetDHT( 
 	U8* uHiHumid,
 	U8* uLoHumid,
 	U8* uHiTemp,	
 	U8* uLoTemp);
-extern U16 GetRelay1( U8* uOn );
-extern U16 GetRelay1( U8* uOn );
+
 	
 	
 #endif //__SMART_HOUSE_H__

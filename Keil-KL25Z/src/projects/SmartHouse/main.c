@@ -23,22 +23,27 @@
 #include "MemMapPtr_KL25Z4.h"
 #include <SerialProtocol.h>
 #include "Delay.h"
+#include "dht11.h"
 
 
-	U8 uPIR 	 = 0;
-	U16 usDistance = 2;
-	U8 uRelay1   = 0;
-	U8 uRelay2   = 0;
-	U8 uHiHumid  = 20;
-	U8 uLoHumid  = 0;	
-	U8 uHiTemp   = 0;	
-	U8 uLoTemp   = 0;	
+
 	
+
 int main(void)
 {
 	//=============================================================================
 	// Local variables:
 	char i;
+	U8 uCmd = 0;
+	U8 uRelay1 = 0;
+	U8 uRelay2 = 0;
+	U16 usRet = 0;
+	U16 usDistance = 400;
+	U8 uHiHumid = 55;
+	U8 uLoHumid = 0;
+	U8 uHiTemp  = 25;
+	U8 uLoTemp  = 0;
+	
 	//=============================================================================
 	// Configuring clock:
 	i=pll_init(8000000, LOW_POWER, CRYSTAL, PLL0_PRDIV, PLL0_VDIV, MCGOUT);
@@ -75,52 +80,38 @@ int main(void)
 	uart0_init(UART0_BASE_PTR,48000,TERMINAL_BAUD); // Initializing Uart0 
 	//=============================================================================
 	
-
 	
 	while(1)
 	{
-		
-		SendPIR(uPIR);								 	
-		//print("\n\r");
-		Delay(1000); // delay for 1s
-		uPIR = ( uPIR == 0 ) ? 1 : 0;
-		
-		SendUltrasonicRange(usDistance);	
-		//print("\n\r");
-		Delay(1000); // delay for 1s
-		usDistance++;
-		if( usDistance > 400 )
+		usRet = RecvBuffer(&uCmd);
+
+		switch(uCmd )
 		{
-			usDistance = 2;
+		case CMD_PIR             : 
+			break; 		       		
+		case CMD_ULTRASONIC_RANGE: 
+			GetUltrasonicRange( &usDistance);
+			break;  		
+		case CMD_RELAY_1		 : 
+			GetRelay1(&uRelay1);
+			break;			
+		case CMD_RELAY_2		 : 
+			GetRelay2(&uRelay2);
+			break; 			
+		case CMD_DHT			 : 
+			GetDHT( &uHiHumid,  &uLoHumid, &uHiTemp, &uLoTemp );
+			break; 			
 		}
 		
-		SendRelay1(uRelay1);							
-		//print("\n\r");
-		Delay(1000); // delay for 1s
-		uRelay1 = ( uRelay1 == 0 ) ? 1 : 0;
-		
-		SendRelay2(uRelay2);	
-		//print("\n\r");
-		Delay(1000); // delay for 1s
-		uRelay2 = ( uRelay2 == 0 ) ? 1 : 0;
-		
-		
-		SendDHT( uHiHumid++, uLoHumid, uHiTemp++, uLoHumid);  
-		//print("\n\r");
-		Delay(1000); // delay for 1s
-		if( uHiHumid > 90 )
+		GetTemp();
+		SendDHT( (U8)(dht.RecHumI), (U8)dht.RecHumD, (U8)dht.RecTI, (U8)dht.RecTD);  
+		if (dht.RecTI> uHiTemp) 
 		{
-			uHiHumid = 20;
+			CtrlRelay(1,0);
 		}
-		if( uHiTemp > 50 )
+		else 
 		{
-			uHiTemp = 0;
-		}
-		if( uLoHumid > 99 )
-		{
-			uLoHumid = 0;
-		}
-		
-		//print("===========================\n\r");
+			CtrlRelay(0,1);
+		}   
 	}
 }

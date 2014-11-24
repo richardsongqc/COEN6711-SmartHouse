@@ -39,6 +39,13 @@ U16 SendBuffer()
 U16 RecvBuffer( U8* uCmd )
 {
 	U8 i = 0;
+	
+	if( uart0_getchar_present(UART0_BASE_PTR) == 0 )
+	{
+		*uCmd = 0;
+		return 0;
+	}
+	
 	memset( szRepBuf, 0, sizeof(szRepBuf) );
 	
 	szRepBuf[0]  = (U8)uart0_getchar(UART0_BASE_PTR);
@@ -147,3 +154,13 @@ U16 GetRelay2( U8* uOn )
 	
 	return 0;
 }
+
+U16 GetUltrasonicRange(U16* usDistance)
+{
+	*usDistance = szRepBuf[2];
+	*usDistance <<= 8;
+	*usDistance |= szRepBuf[3];
+	
+	return 0;
+}
+
