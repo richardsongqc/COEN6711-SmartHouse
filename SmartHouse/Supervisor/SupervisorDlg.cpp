@@ -3,11 +3,14 @@
 //
 
 #include "stdafx.h"
+#include <SerialProtocol.h>
 #include "Supervisor.h"
+#include "Buffer.h"
 #include "SupervisorDlg.h"
 #include "afxdialogex.h"
 #include <Winspool.h>
-#include <SerialProtocol.h>
+
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -49,10 +52,19 @@ END_MESSAGE_MAP()
 
 
 
-CSupervisorDlg::CSupervisorDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CSupervisorDlg::IDD, pParent)
+CSupervisorDlg::CSupervisorDlg(CWnd* pParent /*=NULL*/) : 
+	CDialogEx(CSupervisorDlg::IDD, pParent),
+	m_uOldHiHumid (0),
+	m_uOldLoHumid (0),
+	m_uOldHiTemp  (0),
+	m_uOldLoTemp  (0),
+	m_uOldLocker  (0),
+	m_uOldFan	  (0),
+	m_uOldPIR	  (0),
+	m_nOldDistance(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	MsgQueue.clear();
 }
 
 void CSupervisorDlg::DoDataExchange(CDataExchange* pDX)
@@ -257,21 +269,23 @@ void CSupervisorDlg::OnBnClickedButtonOpenPort()
 	}
 }
 
-
-afx_msg LRESULT CSupervisorDlg::OnComReceive(WPARAM wParam, LPARAM lParam)
+void CSupervisorDlg::ProcessMsg()
 {
 	unsigned char szBuf[256] = { 0 };
-	int len = m_port.read((char*)szBuf, sizeof(szBuf));
-	if (len > 0)
+	while (MsgQueue.size() > 0)
 	{
 		CString str;
+		CBuffer buffer = *(MsgQueue.begin());
+		U8 * p = buffer.GetBuffer();
+		U8 uLen = *( p + 1 );
+		memcpy(szBuf, ((MsgQueue.begin())->GetBuffer()), uLen);
 		switch (szBuf[0])
 		{
 		default:						break;
-		case CMD_PIR			  : 	break;
-		case CMD_ULTRASONIC_RANGE : 	
+		case CMD_PIR: 	break;
+		case CMD_ULTRASONIC_RANGE:
 			break;
-		case CMD_RELAY_1		  : 	
+		case CMD_RELAY_1:
 			if (szBuf[2] == 0)
 			{
 				m_lblLocker.SetWindowText(TEXT("OFF"));
@@ -281,7 +295,7 @@ afx_msg LRESULT CSupervisorDlg::OnComReceive(WPARAM wParam, LPARAM lParam)
 				m_lblLocker.SetWindowText(TEXT("ON"));
 			}
 			break;
-		case CMD_RELAY_2		  : 	
+		case CMD_RELAY_2:
 			if (szBuf[2] == 0)
 			{
 				m_lblFan.SetWindowText(TEXT("OFF"));
@@ -291,20 +305,66 @@ afx_msg LRESULT CSupervisorDlg::OnComReceive(WPARAM wParam, LPARAM lParam)
 				m_lblFan.SetWindowText(TEXT("ON"));
 			}
 			break;
-		case CMD_DHT			  : 	
-			str.Format(TEXT("%d.%d"), szBuf[2], szBuf[3]);
-			m_lblHumid.SetWindowText(str);
+		case CMD_DHT:
+			if (0 != szBuf[2])
+			{
+				str.Format(TEXT("%d.%d"), szBuf[2], szBuf[3]);
+				m_lblHumid.SetWindowText(str);
 
-			str.Format(TEXT("%d.%d"), szBuf[4], szBuf[5]);
-			m_lblTemperature.SetWindowText(str);
+				m_uOldHiHumid = szBuf[2];
+				m_uOldLoHumid = szBuf[3];
+			}
+
+			if (0 != szBuf[4])
+			{
+				str.Format(TEXT("%d.%d"), szBuf[4], szBuf[5]);
+				m_lblTemperature.SetWindowText(str);
+
+				m_uOldHiTemp = szBuf[4];
+				m_uOldLoTemp = szBuf[5];
+			}
 			break;
-		case RSP_PIR			  : 	break;
-		case RSP_ULTRASONIC_RANGE : 	break;
-		case RSP_RELAY_1		  : 	break;
-		case RSP_RELAY_2		  : 	break;
-		case RSP_DHT			  : 	break;
+		case RSP_PIR: 	break;
+		case RSP_ULTRASONIC_RANGE: 	break;
+		case RSP_RELAY_1: 	break;
+		case RSP_RELAY_2: 	break;
+		case RSP_DHT: 	break;
+		}
+
+		MsgQueue.pop_front();
+	}
+
+}
+
+afx_msg LRESULT CSupervisorDlg::OnComReceive(WPARAM wParam, LPARAM lParam)
+{
+	unsigned char szBuf[256] = { 0 };
+	int len = m_port.read((char*)szBuf, sizeof(szBuf));
+	
+	int i = 0;
+
+	while (i < len)
+	{
+		int nCurLen = szBuf[i + 1];
+		CBuffer buffer( szBuf+i, (U8)(nCurLen + 2));
+
+		MsgQueue.push_back(buffer);
+
+		if (szBuf[i + nCurLen + 3] == 0xFF &&
+			szBuf[i + nCurLen + 4] == 0xFF && ( 
+			szBuf[i + nCurLen + 5] >0 ) )
+		{
+			i += nCurLen + 4;
+		}
+		else
+		{
+			break;
 		}
 	}
+
+
+
+	ProcessMsg();
 
 	return 0;
 }

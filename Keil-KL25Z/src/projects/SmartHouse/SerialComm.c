@@ -16,6 +16,9 @@ U16 SendBuffer()
 		uart0_putchar(UART0_BASE_PTR,(char)szCmdBuf[i]);
 	}
 	
+	uart0_putchar(UART0_BASE_PTR,(char)0xFF);
+	uart0_putchar(UART0_BASE_PTR,(char)0xFF);
+	
 	if ( uart0_getchar_present(UART0_BASE_PTR) == 0 )
 	{
 		return ERR_NO_RESPONSE;
