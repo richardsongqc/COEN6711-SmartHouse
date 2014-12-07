@@ -397,9 +397,25 @@ public:
 			PurgeComm(_com_handle, PURGE_TXABORT | PURGE_TXCLEAR);	
 
 		unsigned long w_len = 0, o_len = 0;
-		if(!WriteFile(_com_handle, buf, buf_len, &w_len, &_wo))
-			if(GetLastError() != ERROR_IO_PENDING)
+		char szBuf[256] = { 0 };
+		for (int i = 0; i < buf_len; i++)
+		{
+			szBuf[i] = *(buf + i);
+		}
+
+		if (!WriteFile(_com_handle, buf, buf_len, &w_len, &_wo))
+		{
+			DWORD dwErrCode = GetLastError();
+			if (dwErrCode != ERROR_IO_PENDING)
+			{
 				w_len = 0;
+			}
+			else
+			{
+
+			}
+		}
+
 
 		return w_len;
 	}

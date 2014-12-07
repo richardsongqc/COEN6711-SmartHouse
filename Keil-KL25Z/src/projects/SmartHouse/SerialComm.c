@@ -16,8 +16,8 @@ U16 SendBuffer()
 		uart0_putchar(UART0_BASE_PTR,(char)szCmdBuf[i]);
 	}
 	
-	uart0_putchar(UART0_BASE_PTR,(char)0xFF);
-	uart0_putchar(UART0_BASE_PTR,(char)0xFF);
+	//uart0_putchar(UART0_BASE_PTR,(char)0xFF);
+	//uart0_putchar(UART0_BASE_PTR,(char)0xFF);
 	
 	if ( uart0_getchar_present(UART0_BASE_PTR) == 0 )
 	{
@@ -84,13 +84,18 @@ U16 SendPIR(U8 uOn)							// ON, OFF of PIR
 	return SendBuffer();
 }
 
-U16 SendUltrasonicRange(U16 usDistance) 	// Distance - cm (2-400)
+U16 SetDistance(float fDistance) 	// Distance - cm (2-400)
 {
+	U8 szBuf[4] = {0};
+	memcpy( szBuf, &fDistance, sizeof(szBuf)/sizeof(U8));
+	
 	memset( szCmdBuf, 0, sizeof(szCmdBuf));
 	szCmdBuf[0] = CMD_ULTRASONIC_RANGE;
-	szCmdBuf[1] = sizeof(U16);
-	szCmdBuf[2] = (usDistance>>8) & 0xFF;
-	szCmdBuf[3] = usDistance & 0xFF;
+	szCmdBuf[1] = sizeof(float);
+	szCmdBuf[2] = szBuf[0];
+	szCmdBuf[3] = szBuf[1];
+	szCmdBuf[4] = szBuf[2];
+	szCmdBuf[5] = szBuf[3];
 	
 	return SendBuffer();
 }
@@ -162,11 +167,12 @@ U16 GetRelay2( U8* uOn )
 	return 0;
 }
 
-U16 GetUltrasonicRange(U16* usDistance)
+U16 GetDistance(float* fDistance)
 {
-	*usDistance = szRepBuf[2];
-	*usDistance <<= 8;
-	*usDistance |= szRepBuf[3];
+	U8 szBuf[4] = {0};
+	memcpy( szBuf, szRepBuf + 2, sizeof(szBuf)/sizeof(U8) );
+	
+	memcpy( (U8*)fDistance, szBuf, sizeof(float));
 	
 	return 0;
 }

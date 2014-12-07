@@ -61,7 +61,10 @@ CSupervisorDlg::CSupervisorDlg(CWnd* pParent /*=NULL*/) :
 	m_uOldLocker  (0),
 	m_uOldFan	  (0),
 	m_uOldPIR	  (0),
-	m_nOldDistance(0)
+	m_nOldDistance(0),
+	m_fDistance	  (20),
+	m_fHumid      (40),
+	m_fTemperature(21)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	MsgQueue.clear();
@@ -90,6 +93,7 @@ BEGIN_MESSAGE_MAP(CSupervisorDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_OPEN_PORT, &CSupervisorDlg::OnBnClickedButtonOpenPort)
 	ON_MESSAGE(ON_COM_RECEIVE, &CSupervisorDlg::OnComReceive)
+	ON_BN_CLICKED(IDOK, &CSupervisorDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -125,13 +129,14 @@ BOOL CSupervisorDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+	CString str;
 	m_cboPort.ResetContent();
 	vector<int> listPort = GetSerialPortList();
 	for (vector<int>::iterator iter = listPort.begin();
 		iter != listPort.end();
 		iter++)
 	{
-		CString str;
+		
 		str.Format(TEXT("COM%d"), *iter);
 		m_cboPort.AddString(str);
 	}
@@ -146,6 +151,23 @@ BOOL CSupervisorDlg::OnInitDialog()
 	m_cboBaudRate.AddString(TEXT("128000"));
 	m_cboBaudRate.AddString(TEXT("256000"));
 	m_cboBaudRate.SetCurSel(4);
+
+	str.Format(TEXT("%.2f"), m_fDistance);
+	m_edtParamDistance.SetWindowText(str);
+
+	str.Format(TEXT("%.2f"), m_fHumid);
+	m_edtParamHumid.SetWindowText(str);
+
+	str.Format(TEXT("%.2f"), m_fTemperature);
+	m_edtParamTemperature.SetWindowText(str);
+
+	m_lblFan.SetWindowText(TEXT(""));
+	m_lblHumid.SetWindowText(TEXT(""));
+	m_lblLocker.SetWindowText(TEXT(""));
+	m_lblPIR.SetWindowText(TEXT(""));
+	m_lblTemperature.SetWindowText(TEXT(""));
+	m_lblDistance.SetWindowText(TEXT(""));
+
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -250,6 +272,13 @@ vector<int> CSupervisorDlg::GetSerialPortList()
 void CSupervisorDlg::OnBnClickedButtonOpenPort()
 {
 	// TODO: Add your control notification handler code here
+	m_lblFan.SetWindowText(TEXT(""));
+	m_lblHumid.SetWindowText(TEXT(""));
+	m_lblLocker.SetWindowText(TEXT(""));
+	m_lblPIR.SetWindowText(TEXT(""));
+	m_lblTemperature.SetWindowText(TEXT(""));
+	m_lblDistance.SetWindowText(TEXT(""));
+
 	CString strPort;
 	m_cboPort.GetLBText(m_cboPort.GetCurSel(), strPort);
 	
@@ -277,13 +306,37 @@ void CSupervisorDlg::ProcessMsg()
 		CString str;
 		CBuffer buffer = *(MsgQueue.begin());
 		U8 * p = buffer.GetBuffer();
-		U8 uLen = *( p + 1 );
+		U8 uLen = *( p + 1 ) + 2;
 		memcpy(szBuf, ((MsgQueue.begin())->GetBuffer()), uLen);
 		switch (szBuf[0])
 		{
 		default:						break;
-		case CMD_PIR: 	break;
+		case CMD_PIR:
+			{
+				if (szBuf[2] == 0)
+				{
+					m_lblPIR.SetWindowText(TEXT("OFF"));
+				}
+				else
+				{
+					m_lblPIR.SetWindowText(TEXT("ON"));
+				}
+			}
+			break;
+
 		case CMD_ULTRASONIC_RANGE:
+			{
+				U8 szTemp[4] = { 0 };
+				float fDistance = 0;
+				memcpy((U8*)&fDistance, szBuf + 2, 4);
+				if (fDistance > 0)
+				{
+					str.Format(TEXT("%.2f"), fDistance);
+					m_lblDistance.SetWindowText(str);
+				}
+			}
+
+
 			break;
 		case CMD_RELAY_1:
 			if (szBuf[2] == 0)
@@ -294,6 +347,7 @@ void CSupervisorDlg::ProcessMsg()
 			{
 				m_lblLocker.SetWindowText(TEXT("ON"));
 			}
+
 			break;
 		case CMD_RELAY_2:
 			if (szBuf[2] == 0)
@@ -365,6 +419,82 @@ afx_msg LRESULT CSupervisorDlg::OnComReceive(WPARAM wParam, LPARAM lParam)
 
 
 	ProcessMsg();
+
+	return 0;
+}
+
+
+void CSupervisorDlg::OnBnClickedOk()
+{
+	UpdateDistance();
+	UpdateHumid();
+	UpdateTemperature();
+}
+
+
+int CSupervisorDlg::UpdateDistance()
+{
+	CString str;
+	m_edtParamDistance.GetWindowText(str);
+	
+	float fValue = _ttof(str);
+	//if (fValue != m_fDistance)
+	{	
+		m_fDistance = fValue;
+		unsigned char szBuf[256] = { 0 };
+		szBuf[0] = CMD_SET_DISTANCE;
+		szBuf[1] = sizeof(float);
+
+		memcpy(szBuf + 2, &fValue, sizeof(float));
+
+		int len = m_port.write((char*)szBuf, szBuf[1] + 2);
+
+		TRACE(TEXT("Len = %d"), len);
+	}
+
+	return 0;
+}
+
+
+int CSupervisorDlg::UpdateHumid()
+{
+	CString str;
+	m_edtParamHumid.GetWindowText(str);
+	
+	float fValue = _ttof(str);
+	if (fValue != m_fHumid)
+	{
+		m_fHumid = fValue;
+		unsigned char szBuf[256] = { 0 };
+		szBuf[0] = CMD_SET_HUMID;
+		szBuf[1] = 2;
+		szBuf[2] = (int)fValue;
+		szBuf[3] = (fValue - szBuf[2]) * 100;
+
+		int len = m_port.write((char*)szBuf, szBuf[1] + 2);
+	}
+
+	return 0;
+}
+
+
+int CSupervisorDlg::UpdateTemperature()
+{
+	CString str;
+	m_edtParamTemperature.GetWindowText(str);
+
+	float fValue = _ttof(str);
+	if (fValue != m_fTemperature)
+	{
+		m_fHumid = fValue;
+		unsigned char szBuf[256] = { 0 };
+		szBuf[0] = CMD_SET_TEMPERATURE;
+		szBuf[1] = 2;
+		szBuf[2] = (int)fValue;
+		szBuf[3] = (fValue - szBuf[2]) * 100;
+
+		int len = m_port.write((char*)szBuf, szBuf[1] + 2);
+	}
 
 	return 0;
 }

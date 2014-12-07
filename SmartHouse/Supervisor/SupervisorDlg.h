@@ -66,4 +66,14 @@ public:
 protected:
 	list<CBuffer>		MsgQueue;
 	afx_msg LRESULT OnComReceive(WPARAM wParam, LPARAM lParam);
+	float m_fDistance;
+	float m_fHumid;
+	float m_fTemperature;
+
+
+public:
+	afx_msg void OnBnClickedOk();
+	int UpdateDistance();
+	int UpdateHumid();
+	int UpdateTemperature();
 };

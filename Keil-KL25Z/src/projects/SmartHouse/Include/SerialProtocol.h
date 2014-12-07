@@ -24,6 +24,10 @@ typedef signed long   S32;
 #define RSP_RELAY_2				0x84		// Relay 2
 #define RSP_DHT					0x85		// Digital Humid & Temperature
 
+#define CMD_SET_DISTANCE		0x86		
+#define CMD_SET_HUMID			0x87
+#define CMD_SET_TEMPERATURE		0x88
+
 // Response Code
 #define CMD_OK				 	0x8000
 #define ERR_CMD				 	0x8001
@@ -32,7 +36,7 @@ typedef signed long   S32;
 
 // Send Message from KL25Z board to PC via Serial Port
 extern U16 SendPIR(U8 uOn);						// ON, OFF of PIR
-extern U16 SendUltrasonicRange(U16 usDistance);	// Distance - cm (2-400)
+extern U16 SetDistance(float usDistance);	// Distance - cm (2-400)
 extern U16 SendRelay1(U8 uOn);					// ON, OFF of Relay1
 extern U16 SendRelay2(U8 uOn);					// ON, OFF of Relay2
 extern U16 SendDHT(							 
@@ -43,7 +47,7 @@ extern U16 SendDHT(
 
 // Get Message from PC to KL25Z 
 extern U16 RecvBuffer( U8* uCmd );
-extern U16 GetUltrasonicRange(U16* usDistance);
+extern U16 GetDistance(float* usDistance);
 extern U16 GetRelay1( U8* uOn );
 extern U16 GetRelay2( U8* uOn );
 extern U16 GetDHT( 
@@ -51,7 +55,6 @@ extern U16 GetDHT(
 	U8* uLoHumid,
 	U8* uHiTemp,	
 	U8* uLoTemp);
-
 	
 	
 #endif //__SMART_HOUSE_H__

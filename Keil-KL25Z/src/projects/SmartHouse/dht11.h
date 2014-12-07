@@ -1,4 +1,3 @@
-
 #ifndef DHT11_H
 #define DHT11_H
 
@@ -7,6 +6,7 @@
 
 #define DataPin PORTB->PCR[0];
 
+#include "MKL25Z4.h"
 
 
 typedef enum  
@@ -30,10 +30,15 @@ typedef struct
 	int RecTD;
 } DHT;
 
-extern DHT dht;
 
-extern void InitializeLED(void) ;
+extern DHT dht;
+extern void Initialize(void);
 extern int GetTemp(void);
-extern void CtrlRelay(char Port1,char Port2);
+extern void CtrlRelay(char );
+extern void ReleaseRelay (char );
+extern void InitialSonic(void);
+extern float SonicDistance(void);
+extern void DistanceSet(float Threshold);
+extern int GetInfrared(void);
 
 #endif
