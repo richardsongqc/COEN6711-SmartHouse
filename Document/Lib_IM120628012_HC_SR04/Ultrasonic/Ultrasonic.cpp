@@ -33,7 +33,11 @@ long Ultrasonic::Ranging(int sys)
   distacne_cm = duration /29 / 2 ;
   distance_inc = duration / 74 / 2;
   if (sys)
-  return distacne_cm;
+  {
+	return distacne_cm;
+  }
   else
-  return distance_inc;
+  {
+	return distance_inc;
+  }
 }
